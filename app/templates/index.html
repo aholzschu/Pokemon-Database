@@ -8,16 +8,16 @@
         <div class="col-12 col-md-9 col-lg-7 col-xl-6">
           <div class="card" style="border-radius: 15px;">
             <div class="card-body p-5">
-              <h2 class="text-uppercase text-center mb-5">Welcome to the Pokemon Center</h2>
+              <h2 class="text-uppercase text-center mb-5">Welcome to Pokebattles</h2>
 
               <form>
                 {{form.hidden_tag()}}
-                <h3>Please click the link below to access the pokemon data base: </h3>
-                <a href="http://127.0.0.1:5000/choose"> Select your Pokemon</a>
+                
                 <div class="d-flex justify-content-center">
-                  <button type="button"
-                    class="btn btn-primary btn-block btn-lg">
-                    SELECT 
+                  <button type="button" 
+                  onclick="window.location.href='http://127.0.0.1:5000/login'"
+                  class="btn btn-primary btn-block btn-lg" >
+                    LOGIN 
                   </button>
                     
                 </div>
