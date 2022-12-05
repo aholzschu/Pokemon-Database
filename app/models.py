@@ -11,7 +11,7 @@ class User(db.Model, UserMixin):
     username = db.Column(db.String(50), nullable=False, unique=True)
     email = db.Column(db.String(250), nullable=False, unique = True)
     password = db.Column(db.String(250), nullable=False)
-    post = db.relationship('Post', backref='Author', lazy=True)
+    post = db.relationship('Post', backref='author', lazy=True)
 
     def __init__(self,username, email, password):
         self.username = username
@@ -35,3 +35,16 @@ class Post(db.Model):
         self.img_url = img_url
         self.caption = caption
         self.user_id = user_id
+    
+
+    
+    def save_to_db(self):
+        db.session.add(self)
+        db.session.commit()
+    
+    def update_db(self):
+        db.session.commit()
+    
+    def delete_from_db(self):
+        db.session.delete(self)
+        db.session.commit()

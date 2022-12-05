@@ -1,34 +1,33 @@
 {% extends 'base.html' %}
 {% block content %}
 <section class="vh-100 bg-image"
-  style="background-image: url(https://wallpaperaccess.com/full/8611.jpg);">
+  style="background-image: url(https://wallpaperaccess.com/full/20997.jpg);">
   <div class="mask d-flex align-items-center h-100 gradient-custom-3">
     <div class="container h-100">
       <div class="row d-flex justify-content-center align-items-center h-100">
         <div class="col-12 col-md-9 col-lg-7 col-xl-6">
           <div class="card" style="border-radius: 15px;">
             <div class="card-body p-5">
-              <h2 class="text-uppercase text-center mb-5">Pokebattles Log In</h2>
+              <h2 class="text-uppercase text-center mb-5">Select a new Pokemon</h2>
 
               <form method ="POST">
 
                 {{form.hidden_tag()}}
     
                     <div class="form-outline mb-4">
-                      {{form.username(class="form-control form-control-lg", placeholder="Username" )}}
+                      {{form.title(class="form-control form-control-lg", placeholder="Title", value=post.title)}}
                     </div>
     
                     <div class="form-outline mb-4">
-                      {{form.password(class="form-control form-control-lg", placeholder="Password" )}}
+                      {{form.img_url(class="form-control form-control-lg", placeholder="Image ", value=post.img_url )}}
                     </div>
+
+                    <div class="form-outline mb-4">
+                        {{form.caption(class="form-control form-control-lg", placeholder="Caption", value=post.caption )}}
+                      </div>
     
-                    <div class="d-flex justify-content-center">
-                      {{form.submit(class="btn btn-info btn-block btn-lg", value ='Login')}}
-                    </div>
-
-                    <p class="text-center text-muted mt-5 mb-0">Don't have an account? <a href="http://127.0.0.1:5000/signup"
-                        class="fw-bold text-body"><u>Create an account here</u></a></p>
-
+                      <div class="d-flex justify-content-center">
+                        {{form.submit(class="btn btn-primary btn-block btn-lg", value ='update post')}}
               </form>
 
             </div>

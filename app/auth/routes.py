@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, request, redirect,url_for
+from flask import Blueprint, render_template, request, redirect,url_for, flash, jsonify
 from flask_login import login_user, logout_user, current_user
 from app.auth.forms import PokemonChooserForm, UserCreationForm, UserLoginForm
 from app.models import User
@@ -39,28 +39,39 @@ def login():
             user = User.query.filter_by(username=username).first()
             if user:
                 if check_password_hash(user.password,password):
-                    print('Successfully logged in!')
+                    flash('Successfully logged in!', 'success')
                     login_user(user)
                     return redirect(url_for('home'))
                 else:
-                    print('incorrect password')
+                    flash('Incorrect Password. Please try again.', 'danger')
             else:
-                print('User does not exist.')
+                flash('User does not exist. Please enter a new username or signup with the link below.', 'danger')
     return render_template('login.html', form=form)
 
 
 
 
-@auth.route('/choose', methods=['GET','POST'])
-def choose():
-    form = PokemonChooserForm()
-    if request.method == 'POST':
-        if form.validate():
-            pokemon = form.pokemon.data
-            print(pokemon)
-            print(get_pokemon_stat_data)
-    return render_template('choose.html', form=form)
 
+
+
+
+
+
+# pokemon_name = 'charizard'
+# menucard = [f'https://pokeapi.co/api/v2/pokemon/{pokemon_name}']
+# orders = []
+
+# @auth.route('/choose', methods=['GET','POST'])
+# def choose():
+#     form = PokemonChooserForm()
+#     if request.method == 'GET':
+#         response=jsonify({'Menu':menucard})
+#         response.statu_code = 200
+#         return response
+    #     if form.validate():
+    #         pokemon = form.pokemon.data
+    #         print(pokemon)
+    # return render_template('choose.html', form=form)
 
 
 
