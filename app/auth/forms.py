@@ -10,10 +10,6 @@ class UserCreationForm(FlaskForm):
     confirm_password = PasswordField('Confirm Password', validators=[DataRequired(), EqualTo('password')])
     submit = SubmitField()
 
-class PokemonChooserForm(FlaskForm):
-    pokemon = StringField('Pokemon', validators=[DataRequired()])
-    submit = SubmitField()
-
 class UserLoginForm(FlaskForm):
     username = StringField('Username', validators=[DataRequired()])
     password = PasswordField('Password', validators=[DataRequired()])

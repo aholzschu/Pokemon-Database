@@ -24,18 +24,25 @@ class User(db.Model, UserMixin):
 
 class Post(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    title = db.Column(db.String(50), nullable=False)
+    title = db.Column(db.String(50), nullable=False, unique=True)
     img_url = db.Column(db.String, nullable=False)
-    caption = db.Column(db.String(50), nullable=False)
+    caption = db.Column(db.String(100), nullable=False)
+    hp = db.Column(db.Integer)
+    attack = db.Column(db.Integer)
+    defense = db.Column(db.Integer)
+    spec_attack = db.Column(db.Integer)
     date_created = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
 
-    def __init__(self,title, img_url, caption, user_id):
+    def __init__(self,title, img_url, hp, attack, defense, spec_attack, caption, user_id):
         self.title = title
         self.img_url = img_url
         self.caption = caption
         self.user_id = user_id
-    
+        self.hp = hp
+        self.attack = attack
+        self.defense = defense
+        self.spec_attack = spec_attack
 
     
     def save_to_db(self):
@@ -48,3 +55,4 @@ class Post(db.Model):
     def delete_from_db(self):
         db.session.delete(self)
         db.session.commit()
+

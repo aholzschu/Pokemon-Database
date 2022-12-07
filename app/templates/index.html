@@ -1,34 +1,35 @@
 {% extends 'base.html' %}
 {% block content %}
-<section class="vh-100 bg-image"
-  style="background-image: url(https://wallpaperaccess.com/full/3551101.png);">
-  <div class="mask d-flex align-items-center h-100 gradient-custom-3">
-    <div class="container h-100">
-      <div class="row d-flex justify-content-center align-items-center h-100">
-        <div class="col-12 col-md-9 col-lg-7 col-xl-6">
-          <div class="card bg-dark" style="border-radius: 15px;">
-            <div class="card-body bg-dark p-5">
-              <h2 class="text-uppercase text-center mb-5 text-light bg-dark">Welcome to Pokebattles</h2>
-
-              <form>
-                {{form.hidden_tag()}}
-                
-                <div class="d-flex justify-content-center">
-                  <button type="button" 
-                  onclick="window.location.href='http://127.0.0.1:5000/login'"
-                  class="btn btn-info btn-block btn-lg" style="width: 32rem;" >
-                    LOGIN 
-                  </button>
-                    
+    {% for user in users %}
+    <section class="vh-10">
+        <div class="container py-2 h-100">
+          <div class="row d-flex justify-content-center align-items-center h-100">
+            <div class="col col-md-9 col-lg-7 col-xl-5">
+              <div class="card" style="border-radius: 15px;">
+                <div class="card-body p-5" style="background-color:aqua">
+                  <div class="d-flex text-black">
+                    <div class="flex-shrink-0">
+                      <img src="https://i.pinimg.com/originals/09/da/92/09da926c2b94d95008a9e3b2f60bfdd3.png"
+                        alt="Generic placeholder image" class="img-fluid"
+                        style="width: 180px; border-radius: 10px;">
+                    </div>
+                    <div class="flex-grow-1 ms-3">
+                      <h5 class="mb-1">{{user.username.upper()}}</h5>
+                      <p class="mb-2 pb-1" style="color: #2b2a2a;">Pokemon Trainer</p>
+      
+                      <div class="d-flex pt-1">
+                        <a type="button" class="btn btn-primary me-1 flex-grow-1" href ="/trainers">View Team</a>
+                        <button type="button" class="btn btn-primary flex-grow-1">Battle</button>
+                      </div>
+                    </div>
+                  </div>
                 </div>
-              </form>
-
+              </div>
             </div>
           </div>
         </div>
-      </div>
-    </div>
-  </div>
-</section>
+      </section>
+     
+    {% endfor%}
 {% endblock %}
 

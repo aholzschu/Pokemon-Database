@@ -1,15 +1,19 @@
 {% extends 'base.html' %}
 {% block content %}
 
-<div class="card mx-auto m-5" style="width: 32rem;">
-    <img class="card-img-top" src="{{post.img_url}}" alt="Card image cap">
+<div class="card mx-auto m-5" style="width: 32rem; border-width: 15px; border-color: yellow; background-color: orange;">
+    <h5 class="card-title text-dark p-2">{{post.title.title()}} </h5>
+    <img class="card-img-top mx-auto" src="{{post.img_url}}" style="background-color: darkblue; width: 25rem;"; alt="Card image cap">
     <div class="card-body">
-        <h5 class="card-title">{{post.title}} </h5>
+        <h6 class="card-text text-dark text-center" caption-text>Base Experience: {{post.caption}}</h6>
+        <h6 class="card-text text-dark text-center"  caption-text>HP: {{post.hp}} </h6>
+        <h6 class="card-text text-dark text-center"  caption-text>Attack: {{post.attack}}</h6>
+        <h6 class="card-text text-dark text-center"  caption-text> Defense: {{post.defense}}</h6>
         <h6 class="card-subtitle mb-2 text-muted">{{post.author.username.title()}}</h6>
-        <p class="card-text" caption-text>{{post.caption}}</p>
     </div>
     {% if current_user.id == post.user_id %}
-    <a class="btn btn-success mx-auto mb-3" style ="width: 16rem;" href ="/posts/update/{{post.id}}">Edit</a>
+    <a class="btn btn-primary mx-auto mb-3" style ="width: 16rem;" href ="/posts">Return to Pokedex</a>
+    <!-- <a class="btn btn-success mx-auto mb-3" style ="width: 16rem;" href ="/posts/update/{{post.id}}">Edit</a> -->
     <!-- Button trigger modal -->
     <button type="button" class="btn btn-danger mx-auto mb-3" data-toggle="modal" data-target="#exampleModal"style ="width: 16rem;">
         Delete

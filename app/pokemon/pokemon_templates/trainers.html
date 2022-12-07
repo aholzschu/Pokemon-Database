@@ -1,9 +1,7 @@
-
 {% extends 'base.html' %}
 {% block content %}
   {% for post in posts %}
-    {% if current_user.id == post.user_id %}
-    
+  {% if current_user.id != post.user_id %}
       <a class="card mx-auto m-5 text-decoration-none" style="width: 32rem;border-width: 15px; border-color: yellow; background-color: orange" href ="/posts/{{post.id}}">
         <h5 class="card-title text-dark p-2">{{post.title.title()}} </h5>
         <img class="card-img-top mx-auto" src="{{post.img_url}}" style="background-color: darkblue; width: 25rem;"; alt="Card image cap">
@@ -17,7 +15,6 @@
           </div>
         </div>
       </div>
-
     {% endif %}
   {% endfor %}
 {% endblock %}

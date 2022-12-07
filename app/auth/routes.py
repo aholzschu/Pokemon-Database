@@ -1,6 +1,6 @@
 from flask import Blueprint, render_template, request, redirect,url_for, flash, jsonify
 from flask_login import login_user, logout_user, current_user
-from app.auth.forms import PokemonChooserForm, UserCreationForm, UserLoginForm
+from app.auth.forms import UserCreationForm, UserLoginForm
 from app.models import User
 from werkzeug.security import check_password_hash
 import requests
@@ -34,7 +34,6 @@ def login():
         if form.validate():
             username = form.username.data
             password = form.password.data
-    
 
             user = User.query.filter_by(username=username).first()
             if user:
@@ -49,32 +48,6 @@ def login():
     return render_template('login.html', form=form)
 
 
-
-
-
-
-
-
-
-
-# pokemon_name = 'charizard'
-# menucard = [f'https://pokeapi.co/api/v2/pokemon/{pokemon_name}']
-# orders = []
-
-# @auth.route('/choose', methods=['GET','POST'])
-# def choose():
-#     form = PokemonChooserForm()
-#     if request.method == 'GET':
-#         response=jsonify({'Menu':menucard})
-#         response.statu_code = 200
-#         return response
-    #     if form.validate():
-    #         pokemon = form.pokemon.data
-    #         print(pokemon)
-    # return render_template('choose.html', form=form)
-
-
-
 @auth.route('/logout')
 def logout():
     logout_user()
@@ -83,13 +56,24 @@ def logout():
 
 
 
-#how can i breakdown individual pokemon?
 
-@auth.route('/list', methods=['GET'])
-def lst():
-    req = requests.get('https://pokeapi.co/api/v2/pokemon')
-    data = json.loads(req.content)
-    return render_template('list.html', data=data)
+
+
+
+
+
+
+
+
+
+
+#old work
+
+# @auth.route('/list', methods=['GET'])
+# def lst():
+#     req = requests.get('https://pokeapi.co/api/v2/pokemon')
+#     data = json.loads(req.content)
+#     return render_template('list.html', data=data)
 
 
 
@@ -115,3 +99,21 @@ def lst():
 
 #     else:
 #         return'Please choose another pokemon.'
+
+
+
+# pokemon_name = 'charizard'
+# menucard = [f'https://pokeapi.co/api/v2/pokemon/{pokemon_name}']
+# orders = []
+
+# @auth.route('/choose', methods=['GET','POST'])
+# def choose():
+#     form = PokemonChooserForm()
+#     if request.method == 'GET':
+#         response=jsonify({'Menu':menucard})
+#         response.statu_code = 200
+#         return response
+    #     if form.validate():
+    #         pokemon = form.pokemon.data
+    #         print(pokemon)
+    # return render_template('choose.html', form=form)
