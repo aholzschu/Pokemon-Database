@@ -10,6 +10,15 @@ pokemon = Blueprint('pokemon', __name__, template_folder='pokemon_templates')
 @login_required
 def create_post():
     form = PostForm()
+    posts = Post.query.all()
+    print(posts)
+    new_lst = []
+    for post in posts:
+        x = post.user_id
+        new_lst.append(x)
+    print(new_lst)
+    pokedex_total = new_lst.count(post.user_id)
+    print(pokedex_total)
     if request.method == 'POST':
         if form.validate():
             pokemon_name= form.title.data
@@ -24,16 +33,14 @@ def create_post():
                     attack = data['stats'][1]['base_stat']
                     spec_attack = data['stats'][3]['base_stat']
                     defense = data['stats'][2]['base_stat']
-                    if title.unique == False:
-                        flash(f'Pokemon has already been chosen. Please choose another pokemon', 'danger')
-                        return redirect(url_for('pokemon.create_post'))
-
+      
             else:
-                flash(f'Invalid name please choose another pokemon', 'danger')
+                flash(f'Invalid pokemon name. Please choose another pokemon', 'danger')
                 return redirect(url_for('pokemon.create_post'))
-            
-
-
+    else :
+        if pokedex_total >8:    
+            flash(f'You have reached your pokemon capacity', 'danger')
+            return redirect(url_for('pokemon.create_post'))
 
                     # caption = "Base Experience:" + str(base_experience), "Attack Base Stat:" + str(attack), "HP Base Stat:" + str(hp), "Defense Base Stat:" + str(defense)
                     # title = form.title.data
