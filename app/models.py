@@ -5,6 +5,12 @@ from werkzeug.security import generate_password_hash
 
 db = SQLAlchemy()
 
+# battle = db.Table(
+#     'battles',
+#     db.Column ('battler_id', db.Integer, db.ForeignKey('user.id'), nullable=False),
+#     db.Column ('battled_id', db.Integer, db.ForeignKey('user.id'), nullable=False)
+# )
+
 #create models based off our ERD
 class User(db.Model, UserMixin):
     id = db.Column(db.Integer, primary_key=True)
@@ -12,6 +18,8 @@ class User(db.Model, UserMixin):
     email = db.Column(db.String(250), nullable=False, unique = True)
     password = db.Column(db.String(250), nullable=False)
     post = db.relationship('Post', backref='author', lazy=True)
+    # battles = db.relationship('battles')
+    
 
     def __init__(self,username, email, password):
         self.username = username
@@ -21,6 +29,10 @@ class User(db.Model, UserMixin):
     def save_to_db(self):
         db.session.add(self)
         db.session.commit()
+    
+    # def follow(self, user):
+    #     self.battled.append(user)
+    #     db.session.commit()
 
 class Post(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -33,6 +45,7 @@ class Post(db.Model):
     spec_attack = db.Column(db.Integer)
     date_created = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
+    
 
     def __init__(self,title, img_url, hp, attack, defense, spec_attack, caption, user_id):
         self.title = title

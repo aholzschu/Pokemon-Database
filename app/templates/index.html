@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 {% block content %}
     {% for user in users %}
+      {% if current_user.id != user.id %}
     <section class="vh-10">
         <div class="container py-2 h-100">
           <div class="row d-flex justify-content-center align-items-center h-100">
@@ -14,12 +15,12 @@
                         style="width: 180px; border-radius: 10px;">
                     </div>
                     <div class="flex-grow-1 ms-3">
-                      <h5 class="mb-1">{{user.username.upper()}}</h5>
+                      <h5 class="mb-1">{{user.username.title()}}</h5>
                       <p class="mb-2 pb-1" style="color: #2b2a2a;">Pokemon Trainer</p>
       
                       <div class="d-flex pt-1">
                         <a type="button" class="btn btn-primary me-1 flex-grow-1" href ="/trainers">View Team</a>
-                        <button type="button" class="btn btn-primary flex-grow-1">Battle</button>
+                        <button type="button" class="btn btn-primary flex-grow-1" href ="/trainers" > Battle</button>
                       </div>
                     </div>
                   </div>
@@ -29,7 +30,7 @@
           </div>
         </div>
       </section>
-     
-    {% endfor%}
+      {% endif %}
+    {% endfor %}
 {% endblock %}
 
